@@ -262,7 +262,14 @@ tbody td:first-child { text-align: left; font-weight: 500; }
     </table>
   </div>
 
-  <div class="section-title">Resultados RDC · Todos los coachees <span>Ene–Feb 2026</span></div>
+  <div class="filter-bar" id="overview-filter-bar">
+    <button class="filter-btn active" onclick="filterOverview('all', this)">Todos</button>
+    <button class="filter-btn" onclick="filterOverview('Fernanda Huerta', this)">Fernanda Huerta</button>
+    <button class="filter-btn" onclick="filterOverview('Raquel Robert', this)">Raquel Robert</button>
+    <button class="filter-btn" onclick="filterOverview('Cristian Mendez', this)">Cristian Méndez</button>
+    <button class="filter-btn" onclick="filterOverview('Mauricio Garcia', this)">Mauricio Garcia</button>
+  </div>
+  <div class="section-title">Resultados RDC · Todos los coachees <span>Ene–Mar 2026</span></div>
   <div class="legend">
     <div class="legend-item"><div class="legend-dot" style="background:#5DFFA8"></div> ≥ 90% Objetivo</div>
     <div class="legend-item"><div class="legend-dot" style="background:#F5C842"></div> 75–89% En proceso</div>
@@ -484,7 +491,7 @@ function buildOverview() {
     const tendColor = last2[0] && last2[1] ? (last2[1] >= last2[0] ? '#5DFFA8' : '#FF7B85') : 'var(--muted)';
     const comps = p.yellow.length ? p.yellow.map(c=>`<span class="chip-yellow">${c}</span>`).join(' ') : '<span class="chip-empty">Sin definir</span>';
     const dir = directorMap[p.name] || '—';
-    tbody.innerHTML += `<tr>
+    tbody.innerHTML += `<tr data-director="${dir}">
       <td>${p.name}</td>
       <td><span style="font-size:0.78rem;color:var(--muted)">${p.puesto}</span></td>
       <td><span style="font-size:0.75rem;color:var(--accent2)">${dir}</span></td>
@@ -547,6 +554,15 @@ function buildCoachingCards() {
 }
 
 // Filter cards
+function filterOverview(director, btn) {
+  document.querySelectorAll('#overview-filter-bar .filter-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('#overview-table tr').forEach(row => {
+    if(director === 'all') { row.style.display = ''; return; }
+    row.style.display = row.dataset.director === director ? '' : 'none';
+  });
+}
+
 function filterCards(filter, btn) {
   document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
   btn.classList.add('active');
