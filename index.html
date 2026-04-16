@@ -300,6 +300,13 @@ tbody td:first-child { text-align: left; font-weight: 500; }
     <div class="accent-line"></div>
   </div>
 
+  <div class="filter-bar" id="coaching-director-bar">
+    <button class="filter-btn active" onclick="filterCardsByDirector('all', this)">Todos los directores</button>
+    <button class="filter-btn" onclick="filterCardsByDirector('Fernanda Huerta', this)">Fernanda Huerta</button>
+    <button class="filter-btn" onclick="filterCardsByDirector('Raquel Robert', this)">Raquel Robert</button>
+    <button class="filter-btn" onclick="filterCardsByDirector('Cristian Mendez', this)">Cristian Méndez</button>
+    <button class="filter-btn" onclick="filterCardsByDirector('Mauricio Garcia', this)">Mauricio Garcia</button>
+  </div>
   <div class="filter-bar">
     <button class="filter-btn active" onclick="filterCards('all', this)">Todos</button>
     <button class="filter-btn" onclick="filterCards('ANÁLISIS', this)">Análisis</button>
@@ -529,8 +536,9 @@ function buildCoachingCards() {
       : '<span class="chip-empty">Sin definir aún</span>';
 
     const compKey = p.yellow.map(y=>y.split('/')[0].trim().toUpperCase()).join('_') || 'sin';
+    const cardDir = directorMap[p.name] || '—';
     
-    container.innerHTML += `<div class="person-card" data-comps="${compKey}" data-name="${p.name}">
+    container.innerHTML += `<div class="person-card" data-comps="${compKey}" data-name="${p.name}" data-director="${cardDir}">
       <div class="card-header">
         <div>
           <div class="card-name">${p.name}</div>
@@ -562,14 +570,29 @@ function filterOverview(director, btn) {
   });
 }
 
-function filterCards(filter, btn) {
-  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+function filterCardsByDirector(director, btn) {
+  document.querySelectorAll('#coaching-director-bar .filter-btn').forEach(b=>b.classList.remove('active'));
   btn.classList.add('active');
+  // Reset comp filter buttons to "Todos"
+  document.querySelectorAll('.filter-bar:not(#coaching-director-bar) .filter-btn').forEach((b,i)=>{ if(i===0) b.classList.add('active'); else b.classList.remove('active'); });
   document.querySelectorAll('.person-card').forEach(card => {
-    if(filter === 'all') { card.style.display=''; return; }
-    if(filter === 'sin') { card.style.display = card.dataset.comps === 'sin' ? '' : 'none'; return; }
+    if(director === 'all') { card.style.display = ''; return; }
+    card.style.display = card.dataset.director === director ? '' : 'none';
+  });
+}
+
+function filterCards(filter, btn) {
+  document.querySelectorAll('.filter-bar:not(#coaching-director-bar) .filter-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  const activeDir = document.querySelector('#coaching-director-bar .filter-btn.active')?.dataset?.dir || 'all';
+  const activeDirName = document.querySelector('#coaching-director-bar .filter-btn.active')?.textContent?.trim();
+  document.querySelectorAll('.person-card').forEach(card => {
+    const dirMatch = activeDirName === 'Todos los directores' || card.dataset.director === activeDirName ||
+      card.dataset.director === (activeDirName === 'Cristian Méndez' ? 'Cristian Mendez' : activeDirName);
+    if(filter === 'all') { card.style.display = dirMatch ? '' : 'none'; return; }
+    if(filter === 'sin') { card.style.display = (card.dataset.comps === 'sin' && dirMatch) ? '' : 'none'; return; }
     const comps = card.dataset.comps.toUpperCase();
-    card.style.display = comps.includes(filter.toUpperCase().split('/')[0].trim()) ? '' : 'none';
+    card.style.display = (comps.includes(filter.toUpperCase().split('/')[0].trim()) && dirMatch) ? '' : 'none';
   });
 }
 
