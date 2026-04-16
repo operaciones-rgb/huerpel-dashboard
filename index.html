@@ -220,7 +220,6 @@ tbody td:first-child { text-align: left; font-weight: 500; }
     <button class="tab-btn active" onclick="showView('overview')">Resumen</button>
     <button class="tab-btn" onclick="showView('coaching')">Coaching</button>
     <button class="tab-btn" onclick="showView('pax')">Eval. PAX 360°</button>
-    <button class="tab-btn" onclick="showView('redaction')">Contexto</button>
   </div>
   <div class="nav-date">Junta · Abril 2026</div>
 </nav>
@@ -355,48 +354,6 @@ tbody td:first-child { text-align: left; font-weight: 500; }
   </div>
 </div>
 
-<!-- ===================== REDACTION ===================== -->
-<div id="view-redaction" class="view">
-  <div class="page-header">
-    <h1>Contexto & Objetivos de la Junta</h1>
-    <p>Versión optimizada de los objetivos planteados para esta sesión</p>
-    <div class="accent-line"></div>
-  </div>
-  <div class="redaction-box">
-    <h2>Reescritura de objetivos — versión optimizada</h2>
-
-    <div class="redaction-block">
-      <div class="redaction-label">Original</div>
-      <div class="redaction-original">"quiero que interpretes la información que te pongo y lograr dos objetivos..."</div>
-      <div class="redaction-arrow">↓</div>
-      <div class="redaction-new"><strong>Objetivo general:</strong> Consolidar y visualizar la información del proceso de coaching activo de HUERPEL para preparar la junta con el cliente, y cruzarla con las herramientas de evaluación disponibles para iniciar la conversación sobre un proceso de sucesión.</div>
-    </div>
-
-    <div class="redaction-block">
-      <div class="redaction-label">Objetivo 1 — Mapeo de Competencias en Coaching</div>
-      <div class="redaction-new">Generar un archivo que concentre, por persona, las competencias que están trabajando activamente en su proceso de coaching (identificadas en amarillo en el archivo <em>Resultados Finales HUERPEL</em>), para tener una vista clara y exportable del estatus actual de cada coachee.</div>
-    </div>
-
-    <div class="redaction-block">
-      <div class="redaction-label">Objetivo 2 — Análisis de Sucesión (datos en Excel)</div>
-      <div class="redaction-new">Cruzar los resultados del proceso de coaching con la <em>Evaluación 360° PAX Comercial</em> y los <em>Resultados CL Comercial</em> para construir un perfil comparativo de los candidatos a dos movimientos de sucesión: <strong>(1) un Gerente de Ventas que podría ascender a Director</strong> y <strong>(2) un Director de Zona que podría ascender a Director Comercial</strong>. Este análisis servirá de base para la conversación en la junta de mañana.</div>
-    </div>
-
-    <div class="redaction-block">
-      <div class="redaction-label">Entregables para la junta</div>
-      <div class="redaction-new">
-        1. <strong>Excel estructurado</strong> con 4 pestañas: Competencias en Coaching / Detalle 360° por Persona / Perfil de Sucesión / Evaluación PAX 360° (la info de sucesión se conserva en el Excel)<br><br>
-        2. <strong>Dashboard interactivo</strong> (este archivo) para presentar visualmente en la junta con navegación por secciones.<br><br>
-        3. <strong>Pendiente de confirmar:</strong> ¿Quiénes son exactamente los dos candidatos a los procesos de sucesión? Actualmente el dashboard incluye a todos los Gerentes y Directores del grupo para que el cliente pueda elegir o comparar.
-      </div>
-    </div>
-
-    <div class="redaction-block">
-      <div class="redaction-label">⚠️ Dato a verificar</div>
-      <div class="redaction-new">El nombre de <strong>Maricela Lima</strong> fue confirmado y corregido. Todos los coachees tienen sus competencias de coaching definidas y actualizadas.</div>
-    </div>
-  </div>
-</div>
 
 <script>
 const people = [
