@@ -7,24 +7,24 @@
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
 :root {
-  --navy: #0D1B2A;
-  --blue: #1A3A5C;
-  --accent: #E8A130;
-  --accent2: #3ABFBF;
-  --green: #2DBF7E;
-  --red: #E84855;
-  --yellow: #F5C842;
-  --light: #F0F4FA;
+  --navy: #111827;
+  --blue: #1E3A8A;
+  --accent: #C0392B;
+  --accent2: #1E3A8A;
+  --green: #16A34A;
+  --red: #C0392B;
+  --yellow: #D97706;
+  --light: #F9FAFB;
   --white: #FFFFFF;
-  --muted: #8899AA;
-  --card: #162033;
-  --border: rgba(255,255,255,0.07);
+  --muted: #6B7280;
+  --card: #FFFFFF;
+  --border: rgba(0,0,0,0.08);
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body {
   font-family: 'DM Sans', sans-serif;
-  background: var(--navy);
-  color: var(--white);
+  background: #F9FAFB;
+  color: #111827;
   min-height: 100vh;
   overflow-x: hidden;
 }
@@ -33,90 +33,91 @@ body {
 .nav {
   display: flex; align-items: center; justify-content: space-between;
   padding: 18px 48px;
-  border-bottom: 1px solid var(--border);
-  background: rgba(13,27,42,0.95);
+  border-bottom: 2px solid #C0392B;
+  background: #FFFFFF;
   position: sticky; top: 0; z-index: 100;
-  backdrop-filter: blur(12px);
+  box-shadow: 0 1px 8px rgba(0,0,0,0.08);
 }
-.nav-logo { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.1rem; letter-spacing: 3px; color: var(--accent); }
+.nav-logo { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.1rem; letter-spacing: 3px; color: #C0392B; }
 .nav-tabs { display: flex; gap: 4px; }
 .tab-btn {
-  padding: 8px 20px; border: none; background: transparent; color: var(--muted);
+  padding: 8px 20px; border: none; background: transparent; color: #6B7280;
   font-family: 'DM Sans', sans-serif; font-size: 0.82rem; font-weight: 500;
   cursor: pointer; border-radius: 6px; transition: all .2s; letter-spacing: .5px;
 }
-.tab-btn.active { background: var(--accent); color: var(--navy); font-weight: 700; }
-.tab-btn:hover:not(.active) { background: rgba(255,255,255,0.07); color: var(--white); }
-.nav-date { font-size: 0.8rem; color: var(--muted); }
+.tab-btn.active { background: #C0392B; color: #FFFFFF; font-weight: 700; }
+.tab-btn:hover:not(.active) { background: #F3F4F6; color: #111827; }
+.nav-date { font-size: 0.8rem; color: #9CA3AF; }
 
 /* VIEWS */
-.view { display: none; padding: 40px 48px; animation: fadeIn .3s ease; }
+.view { display: none; padding: 40px 48px; animation: fadeIn .3s ease; background: #F9FAFB; min-height: calc(100vh - 65px); }
 .view.active { display: block; }
 @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
 
 /* PAGE HEADER */
 .page-header { margin-bottom: 32px; }
-.page-header h1 { font-family: 'Syne', sans-serif; font-size: 1.9rem; font-weight: 800; }
-.page-header p { color: var(--muted); margin-top: 6px; font-size: 0.9rem; }
-.accent-line { width: 40px; height: 4px; background: var(--accent); border-radius: 2px; margin-top: 10px; }
+.page-header h1 { font-family: 'Syne', sans-serif; font-size: 1.9rem; font-weight: 800; color: #111827; }
+.page-header p { color: #6B7280; margin-top: 6px; font-size: 0.9rem; }
+.accent-line { width: 40px; height: 4px; background: #C0392B; border-radius: 2px; margin-top: 10px; }
 
 /* KPI STRIP */
 .kpi-strip { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 16px; margin-bottom: 36px; }
 .kpi {
-  background: var(--card); border: 1px solid var(--border); border-radius: 12px;
+  background: #FFFFFF; border: 1px solid #E5E7EB; border-radius: 12px;
   padding: 20px; position: relative; overflow: hidden;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
 }
 .kpi::before {
-  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
-  background: var(--kpi-color, var(--accent));
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px;
+  background: var(--kpi-color, #C0392B);
 }
-.kpi-value { font-family: 'Syne', sans-serif; font-size: 2rem; font-weight: 800; color: var(--kpi-color, var(--accent)); }
-.kpi-label { font-size: 0.78rem; color: var(--muted); margin-top: 4px; letter-spacing: .5px; text-transform: uppercase; }
+.kpi-value { font-family: 'Syne', sans-serif; font-size: 2rem; font-weight: 800; color: var(--kpi-color, #C0392B); }
+.kpi-label { font-size: 0.78rem; color: #6B7280; margin-top: 4px; letter-spacing: .5px; text-transform: uppercase; }
 
 /* COMP TABLE */
 .section-title {
   font-family: 'Syne', sans-serif; font-size: 1rem; font-weight: 700;
-  margin-bottom: 16px; display: flex; align-items: center; gap: 10px;
+  margin-bottom: 16px; display: flex; align-items: center; gap: 10px; color: #111827;
 }
 .section-title span {
-  background: var(--accent); color: var(--navy);
+  background: #C0392B; color: #FFFFFF;
   font-size: 0.7rem; padding: 2px 8px; border-radius: 20px;
 }
 
-.table-wrap { overflow-x: auto; border-radius: 12px; border: 1px solid var(--border); }
+.table-wrap { overflow-x: auto; border-radius: 12px; border: 1px solid #E5E7EB; box-shadow: 0 1px 4px rgba(0,0,0,0.05); }
 table { width: 100%; border-collapse: collapse; font-size: 0.82rem; }
-thead tr { background: var(--blue); }
+thead tr { background: #1E3A8A; }
 thead th {
   padding: 12px 14px; text-align: center; font-family: 'Syne', sans-serif;
   font-size: 0.72rem; font-weight: 700; letter-spacing: .8px; text-transform: uppercase;
-  color: rgba(255,255,255,0.7); white-space: nowrap;
+  color: rgba(255,255,255,0.85); white-space: nowrap;
 }
 thead th:first-child { text-align: left; }
-tbody tr { border-bottom: 1px solid var(--border); transition: background .15s; }
-tbody tr:hover { background: rgba(255,255,255,0.03); }
+tbody tr { border-bottom: 1px solid #F3F4F6; transition: background .15s; }
+tbody tr:hover { background: #F9FAFB; }
 tbody tr:last-child { border-bottom: none; }
-tbody td { padding: 11px 14px; text-align: center; color: rgba(255,255,255,0.85); }
-tbody td:first-child { text-align: left; font-weight: 500; }
+tbody td { padding: 11px 14px; text-align: center; color: #374151; }
+tbody td:first-child { text-align: left; font-weight: 600; color: #111827; }
 
 .chip-yellow {
-  background: var(--yellow); color: #3B2D00;
+  background: #FEF3C7; color: #92400E; border: 1px solid #FCD34D;
   font-weight: 700; padding: 3px 9px; border-radius: 20px; font-size: 0.72rem;
   white-space: nowrap;
 }
 .chip-blue {
-  background: rgba(58,191,191,0.15); color: var(--accent2); border: 1px solid var(--accent2);
+  background: #EFF6FF; color: #1E3A8A; border: 1px solid #BFDBFE;
   padding: 3px 9px; border-radius: 20px; font-size: 0.72rem; white-space: nowrap;
 }
-.chip-empty { color: var(--muted); font-size: 0.78rem; }
+.chip-empty { color: #9CA3AF; font-size: 0.78rem; }
 
 .score {
   display: inline-block; padding: 3px 10px; border-radius: 6px;
   font-weight: 600; font-size: 0.8rem;
 }
-.score-green { background: rgba(45,191,126,0.2); color: #5DFFA8; }
-.score-yellow { background: rgba(245,200,66,0.2); color: #F5C842; }
-.score-red { background: rgba(232,72,85,0.2); color: #FF7B85; }
-.score-none { color: var(--muted); }
+.score-green { background: #DCFCE7; color: #15803D; font-weight: 700; }
+.score-yellow { background: #FEF9C3; color: #92400E; font-weight: 700; }
+.score-red { background: #FEE2E2; color: #B91C1C; font-weight: 700; }
+.score-none { color: #9CA3AF; }
 
 /* PERSON CARDS */
 .cards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 20px; }
@@ -136,12 +137,12 @@ tbody td:first-child { text-align: left; font-weight: 500; }
 .card-comps-label { font-size: 0.7rem; color: var(--muted); text-transform: uppercase; letter-spacing: .8px; margin-bottom: 8px; }
 .comp-bars { display: flex; flex-direction: column; gap: 6px; }
 .comp-bar-row { display: flex; align-items: center; gap: 8px; font-size: 0.75rem; }
-.comp-bar-label { width: 150px; flex-shrink: 0; color: rgba(255,255,255,0.7); text-overflow: ellipsis; overflow: hidden; white-space: nowrap; }
-.comp-bar-track { flex: 1; height: 5px; background: rgba(255,255,255,0.08); border-radius: 10px; }
+.comp-bar-label { width: 150px; flex-shrink: 0; color: #4B5563; text-overflow: ellipsis; overflow: hidden; white-space: nowrap; }
+.comp-bar-track { flex: 1; height: 5px; background: #E5E7EB; border-radius: 10px; }
 .comp-bar-fill { height: 100%; border-radius: 10px; transition: width 1s ease; }
 .comp-bar-val { width: 34px; text-align: right; font-weight: 600; font-size: 0.72rem; }
 .coaching-tag {
-  margin-top: 2px; font-size: 0.68rem; color: var(--yellow); font-weight: 700;
+  margin-top: 2px; font-size: 0.68rem; color: #D97706; font-weight: 700;
   letter-spacing: .5px;
 }
 
@@ -178,23 +179,23 @@ tbody td:first-child { text-align: left; font-weight: 500; }
 
 /* PAX TABLE */
 .pax-note {
-  background: rgba(26,58,92,0.4); border: 1px solid rgba(58,191,191,0.2);
+  background: #EFF6FF; border: 1px solid #BFDBFE;
   border-radius: 8px; padding: 12px 16px; margin-bottom: 20px;
-  font-size: 0.82rem; color: rgba(255,255,255,0.7); line-height: 1.5;
+  font-size: 0.82rem; color: #1E3A8A; line-height: 1.5;
 }
 
 /* FILTER BAR */
 .filter-bar { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 24px; }
 .filter-btn {
-  padding: 6px 14px; border: 1px solid var(--border); background: transparent;
-  color: var(--muted); border-radius: 20px; font-size: 0.78rem; cursor: pointer;
+  padding: 6px 14px; border: 1px solid #D1D5DB; background: #FFFFFF;
+  color: #6B7280; border-radius: 20px; font-size: 0.78rem; cursor: pointer;
   transition: all .2s; font-family: 'DM Sans', sans-serif;
 }
-.filter-btn.active { background: var(--accent2); color: var(--navy); border-color: var(--accent2); font-weight: 700; }
-.filter-btn:hover:not(.active) { border-color: var(--muted); color: var(--white); }
+.filter-btn.active { background: #1E3A8A; color: #FFFFFF; border-color: #1E3A8A; font-weight: 700; }
+.filter-btn:hover:not(.active) { border-color: #9CA3AF; color: #111827; background: #F9FAFB; }
 
 /* LEGEND */
-.legend { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 16px; align-items: center; font-size: 0.78rem; color: var(--muted); }
+.legend { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 16px; align-items: center; font-size: 0.78rem; color: #6B7280; }
 .legend-item { display: flex; align-items: center; gap: 6px; }
 .legend-dot { width: 10px; height: 10px; border-radius: 50%; }
 
@@ -221,7 +222,7 @@ tbody td:first-child { text-align: left; font-weight: 500; }
     <button class="tab-btn" onclick="showView('coaching')">Coaching</button>
     <button class="tab-btn" onclick="showView('pax')">Eval. PAX 360°</button>
   </div>
-  <div class="nav-date">Junta · Abril 2026</div>
+  <div class="nav-date">Mayo 2026</div>
 </nav>
 
 <!-- ===================== OVERVIEW ===================== -->
@@ -233,11 +234,12 @@ tbody td:first-child { text-align: left; font-weight: 500; }
   </div>
 
   <div class="kpi-strip">
-    <div class="kpi" style="--kpi-color: #3ABFBF"><div class="kpi-value">15</div><div class="kpi-label">Coachees activos</div></div>
-    <div class="kpi" style="--kpi-color: #F5C842"><div class="kpi-value">10</div><div class="kpi-label">Con competencias definidas</div></div>
+    <div class="kpi" style="--kpi-color: #1E3A8A"><div class="kpi-value">15</div><div class="kpi-label">Coachees activos</div></div>
+    <div class="kpi" style="--kpi-color: #1E3A8A"><div class="kpi-value">15</div><div class="kpi-label">Coachees activos en coaching</div></div>
     <div class="kpi" style="--kpi-color: #2DBF7E"><div class="kpi-value">87%</div><div class="kpi-label">RDC prom. Enero 2026</div></div>
     <div class="kpi" style="--kpi-color: #E8A130"><div class="kpi-value">82%</div><div class="kpi-label">RDC prom. Febrero 2026</div></div>
-    <div class="kpi" style="--kpi-color: #E8A130"><div class="kpi-value">78%</div><div class="kpi-label">RDC prom. Marzo 2026</div></div>
+    <div class="kpi" style="--kpi-color: #D97706"><div class="kpi-value">77%</div><div class="kpi-label">RDC prom. Marzo 2026</div></div>
+    <div class="kpi" style="--kpi-color: #D97706"><div class="kpi-value">87%</div><div class="kpi-label">RDC prom. Abril 2026</div></div>
   </div>
 
   <div class="section-title">Competencias más trabajadas en coaching <span>HUERPEL 2026</span></div>
@@ -268,7 +270,7 @@ tbody td:first-child { text-align: left; font-weight: 500; }
     <button class="filter-btn" onclick="filterOverview('Cristian Mendez', this)">Cristian Méndez</button>
     <button class="filter-btn" onclick="filterOverview('Mauricio Garcia', this)">Mauricio Garcia</button>
   </div>
-  <div class="section-title">Resultados RDC · Todos los coachees <span>Ene–Mar 2026</span></div>
+  <div class="section-title">Resultados RDC · Todos los coachees <span>Ene–Abr 2026</span></div>
   <div class="legend">
     <div class="legend-item"><div class="legend-dot" style="background:#5DFFA8"></div> ≥ 90% Objetivo</div>
     <div class="legend-item"><div class="legend-dot" style="background:#F5C842"></div> 75–89% En proceso</div>
@@ -283,6 +285,7 @@ tbody td:first-child { text-align: left; font-weight: 500; }
         <th>RDC Enero</th>
         <th>RDC Febrero</th>
         <th>RDC Marzo</th>
+        <th>RDC Abril</th>
         <th>Tendencia</th>
         <th>Competencias en proceso</th>
       </tr></thead>
@@ -357,33 +360,33 @@ tbody td:first-child { text-align: left; font-weight: 500; }
 
 <script>
 const people = [
-  {name:"Viridiana Rivera", puesto:"Directora", rdc:[.93,.96,.71], yellow:["AGENDA","COMUNICACIÓN"],
+  {name:"Viridiana Rivera", puesto:"Directora", rdc:[.93,.96,.71,.74], yellow:["AGENDA","COMUNICACIÓN"],
    scores:{ANÁLISIS:[1,.75,.63,.83],"INICIATIVA/PROACTIVIDAD":[.75,.75,.88,.92],AGENDA:[1,.5,.75,.92],COMUNICACIÓN:[.75,.5,.63,1],CONFIANZA:[1,1,.88,.92],"DELEGACIÓN/EMPODERAMIENTO":[1,.5,.63,.92],DESARROLLO:[1,.75,.75,.92]}},
-  {name:"Laura González", puesto:"Gerente de Ventas", rdc:[.99,.9,.67], yellow:["AGENDA","DESARROLLO"],
+  {name:"Laura González", puesto:"Gerente de Ventas", rdc:[.99,.9,.67,.72], yellow:["AGENDA","DESARROLLO"],
    scores:{ANÁLISIS:[.75,.75,.63,.25],"INICIATIVA/PROACTIVIDAD":[1,1,.88,.08],AGENDA:[.75,.5,.63,.42],COMUNICACIÓN:[.75,.75,.63,.17],CONFIANZA:[.75,.75,.88,.25],"DELEGACIÓN/EMPODERAMIENTO":[1,.5,.63,.33],DESARROLLO:[1,1,.88,.25]}},
-  {name:"Leonardo Wallace", puesto:"Gerente de Ventas", rdc:[1.0,.82,.63], yellow:["COMUNICACIÓN","DESARROLLO"],
+  {name:"Leonardo Wallace", puesto:"Gerente de Ventas", rdc:[1.0,.82,.63,.89], yellow:["COMUNICACIÓN","DESARROLLO"],
    scores:{ANÁLISIS:[1,1,.5,1],"INICIATIVA/PROACTIVIDAD":[1,1,.63,1],AGENDA:[1,1,.5,1],COMUNICACIÓN:[1,.5,.75,1],CONFIANZA:[1,.5,.75,1],"DELEGACIÓN/EMPODERAMIENTO":[.75,.75,.75,1],DESARROLLO:[.75,.75,.75,1]}},
-  {name:"Argenis Rodriguez", puesto:"Gerente de Ventas", rdc:[.98,.97,.94], yellow:["INICIATIVA/PROACTIVIDAD","DESARROLLO"],
+  {name:"Argenis Rodriguez", puesto:"Gerente de Ventas", rdc:[.98,.97,.94,.92], yellow:["INICIATIVA/PROACTIVIDAD","DESARROLLO"],
    scores:{ANÁLISIS:[.75,.5,.92,.81],"INICIATIVA/PROACTIVIDAD":[0,.25,.75,.69],AGENDA:[.5,.5,.83,.75],COMUNICACIÓN:[.75,.75,.83,.75],CONFIANZA:[1,.75,.92,.69],"DELEGACIÓN/EMPODERAMIENTO":[.5,.5,.83,.63],DESARROLLO:[1,.75,.83,.75]}},
-  {name:"Cristian Mendez", puesto:"Director Nuevos", rdc:[.8533,.6867,.67], yellow:["ANÁLISIS"],
+  {name:"Cristian Mendez", puesto:"Director Nuevos", rdc:[.8533,.6867,.67,.8933], yellow:["ANÁLISIS"],
    scores:{ANÁLISIS:[1,.5,.75,.94],"INICIATIVA/PROACTIVIDAD":[1,.75,1,1],AGENDA:[1,.75,1,1],COMUNICACIÓN:[1,1,.88,1],CONFIANZA:[1,.75,1,.94],"DELEGACIÓN/EMPODERAMIENTO":[1,.75,.88,.94],DESARROLLO:[1,.75,1,.94]}},
-  {name:"Raquel Robert", puesto:"Directora Nuevos", rdc:[.945,.9175,.9275], yellow:["ANÁLISIS","COMUNICACIÓN"],
+  {name:"Raquel Robert", puesto:"Directora Nuevos", rdc:[.945,.9175,.9275,.9275], yellow:["ANÁLISIS","COMUNICACIÓN"],
    scores:{ANÁLISIS:[.75,.5,.88,1],"INICIATIVA/PROACTIVIDAD":[.75,.5,.75,1],AGENDA:[.5,.75,.75,1],COMUNICACIÓN:[.5,.75,.88,.94],CONFIANZA:[.75,.5,.88,1],"DELEGACIÓN/EMPODERAMIENTO":[.75,.5,.88,.94],DESARROLLO:[1,.75,.88,.94]}},
-  {name:"Fernando Villa", puesto:"Coordinador", rdc:[.9385,.5846,.54], yellow:["ANÁLISIS","COMUNICACIÓN"],
+  {name:"Fernando Villa", puesto:"Coordinador", rdc:[.9385,.5846,.54,.82], yellow:["ANÁLISIS","COMUNICACIÓN"],
    scores:{ANÁLISIS:[.75,.75,.75,.75],"INICIATIVA/PROACTIVIDAD":[1,.75,1,.5],AGENDA:[.75,.25,.75,.5],COMUNICACIÓN:[.5,.25,.25,.75],CONFIANZA:[.75,.25,.75,.63],"DELEGACIÓN/EMPODERAMIENTO":[.75,.5,.75,.88],DESARROLLO:[.75,.25,1,.75]}},
-  {name:"Dario Oronzor", puesto:"Gerente de Ventas", rdc:[.9,.79,.88], yellow:["ANÁLISIS","COMUNICACIÓN"],
+  {name:"Dario Oronzor", puesto:"Gerente de Ventas", rdc:[.9,.79,.88,.90], yellow:["ANÁLISIS","COMUNICACIÓN"],
    scores:{ANÁLISIS:[.5,.75,.75,1],"INICIATIVA/PROACTIVIDAD":[.75,.5,.75,1],AGENDA:[.5,.75,.92,1],COMUNICACIÓN:[.5,.75,.75,1],CONFIANZA:[.75,1,.83,1],"DELEGACIÓN/EMPODERAMIENTO":[.75,.75,1,1],DESARROLLO:[.5,.75,.92,1]}},
-  {name:"Maricela Lima", puesto:"Coordinador", rdc:[1.25,1.19,.92], yellow:["ANÁLISIS","COMUNICACIÓN"],
+  {name:"Maricela Lima", puesto:"Coordinador", rdc:[1.25,1.19,.92,1.02], yellow:["ANÁLISIS","COMUNICACIÓN"],
    scores:{ANÁLISIS:[1,.75,.75,1],"INICIATIVA/PROACTIVIDAD":[1,.75,.5,.88],AGENDA:[1,.5,.75,.75],COMUNICACIÓN:[.75,.25,.5,1],CONFIANZA:[1,1,.75,1],"DELEGACIÓN/EMPODERAMIENTO":[1,.75,.5,1],DESARROLLO:[1,.5,.75,1]}},
-  {name:"Janet Ramirez", puesto:"Gerente de Ventas", rdc:[.97,.99,.99], yellow:["ANÁLISIS","DESARROLLO"],
+  {name:"Janet Ramirez", puesto:"Gerente de Ventas", rdc:[.97,.99,.99,.95], yellow:["ANÁLISIS","DESARROLLO"],
    scores:{ANÁLISIS:[.75,.75,.92,.75],"INICIATIVA/PROACTIVIDAD":[.75,1,.83,.67],AGENDA:[1,.75,.92,1],COMUNICACIÓN:[.75,.75,.92,.83],CONFIANZA:[1,1,.92,.83],"DELEGACIÓN/EMPODERAMIENTO":[.75,.75,1,.83],DESARROLLO:[.75,.75,.83,.75]}},
-  {name:"Mauricio Garcia", puesto:"Director Nuevos", rdc:[.96,.93,.69], yellow:["AGENDA","DELEGACIÓN/EMPODERAMIENTO"],
+  {name:"Mauricio Garcia", puesto:"Director Nuevos", rdc:[.96,.93,.69,.73], yellow:["AGENDA","DELEGACIÓN/EMPODERAMIENTO"],
    scores:{ANÁLISIS:[1,1,.88,1],"INICIATIVA/PROACTIVIDAD":[1,.75,.88,1],AGENDA:[1,.25,1,1],COMUNICACIÓN:[1,.75,.88,.88],CONFIANZA:[1,1,.88,1],"DELEGACIÓN/EMPODERAMIENTO":[1,0,.88,1],DESARROLLO:[1,1,.88,1]}},
-  {name:"Emilio Cajica", puesto:"Gerente de Ventas", rdc:[.71,.61,.86], yellow:["AGENDA","DESARROLLO"],
+  {name:"Emilio Cajica", puesto:"Gerente de Ventas", rdc:[.71,.61,.86,.92], yellow:["AGENDA","DESARROLLO"],
    scores:{ANÁLISIS:[.75,.75,.67,.7],"INICIATIVA/PROACTIVIDAD":[.75,1,.75,.8],AGENDA:[.5,.5,.58,.7],COMUNICACIÓN:[.75,1,.92,.95],CONFIANZA:[.75,1,.75,.7],"DELEGACIÓN/EMPODERAMIENTO":[.25,.5,.83,.85],DESARROLLO:[.75,.75,.75,.65]}},
-  {name:"Angeles Basilio", puesto:"Gerente de Ventas", rdc:[.85,.63,.52], yellow:["INICIATIVA / PROACTIVIDAD","AGENDA"],
+  {name:"Angeles Basilio", puesto:"Gerente de Ventas", rdc:[.85,.63,.52,.87], yellow:["INICIATIVA / PROACTIVIDAD","AGENDA"],
    scores:{ANÁLISIS:[.75,.75,.75,.92],"INICIATIVA/PROACTIVIDAD":[1,.5,.58,.83],AGENDA:[.5,.5,.75,.83],COMUNICACIÓN:[.75,1,.83,.92],CONFIANZA:[1,1,.83,.92],"DELEGACIÓN/EMPODERAMIENTO":[.75,1,.92,1],DESARROLLO:[.75,.75,.75,.92]}},
-  {name:"Cristofer Torres", puesto:"Gerente de Ventas", rdc:[.93,.92,.90], yellow:["AGENDA","COMUNICACIÓN"],
+  {name:"Cristofer Torres", puesto:"Gerente de Ventas", rdc:[.93,.92,.90,.94], yellow:["AGENDA","COMUNICACIÓN"],
    scores:{ANÁLISIS:[1,.5,.67,1],"INICIATIVA/PROACTIVIDAD":[1,.75,.92,1],AGENDA:[1,.5,.67,1],COMUNICACIÓN:[1,.75,.83,1],CONFIANZA:[1,.5,.83,1],"DELEGACIÓN/EMPODERAMIENTO":[1,1,.83,1],DESARROLLO:[1,.75,.75,1]}},
 ];
 
@@ -448,10 +451,20 @@ function paxScore(v) {
 function buildOverview() {
   const tbody = document.getElementById('overview-table');
   people.forEach(p => {
-    const rdcE = p.rdc[0], rdcF = p.rdc[1], rdcM = p.rdc[2];
-    const last2 = rdcM != null ? [rdcF, rdcM] : [rdcE, rdcF];
-    const tend = last2[0] && last2[1] ? (last2[1] >= last2[0] ? '↑' : '↓') : '—';
-    const tendColor = last2[0] && last2[1] ? (last2[1] >= last2[0] ? '#5DFFA8' : '#FF7B85') : 'var(--muted)';
+    const rdcE = p.rdc[0], rdcF = p.rdc[1], rdcM = p.rdc[2], rdcA = p.rdc[3];
+    const lastVals = [rdcM, rdcA].filter(v=>v!=null);
+    const prev = lastVals.length >= 2 ? lastVals[lastVals.length-2] : (rdcM != null ? rdcF : rdcE);
+    const curr = lastVals.length >= 1 ? lastVals[lastVals.length-1] : rdcF;
+    const isUp = curr >= prev;
+    let tendColor, tend;
+    if (isUp) {
+      tend = '↑'; tendColor = '#5DFFA8';
+    } else {
+      tend = '↓';
+      if (curr >= 0.90) tendColor = 'rgba(255,255,255,0.3)';
+      else if (curr >= 0.75) tendColor = '#F5C842';
+      else tendColor = '#FF7B85';
+    }
     const comps = p.yellow.length ? p.yellow.map(c=>`<span class="chip-yellow">${c}</span>`).join(' ') : '<span class="chip-empty">Sin definir</span>';
     const dir = directorMap[p.name] || '—';
     tbody.innerHTML += `<tr data-director="${dir}">
@@ -461,6 +474,7 @@ function buildOverview() {
       <td>${scoreHTML(rdcE)}</td>
       <td>${scoreHTML(rdcF)}</td>
       <td>${rdcM != null ? scoreHTML(rdcM) : '<span class="score-none">—</span>'}</td>
+      <td>${rdcA != null ? scoreHTML(rdcA) : '<span class="score-none">—</span>'}</td>
       <td style="color:${tendColor};font-size:1.1rem;font-weight:700">${tend}</td>
       <td style="text-align:left">${comps}</td>
     </tr>`;
@@ -505,6 +519,7 @@ function buildCoachingCards() {
           ${p.rdc[0]?`<span class="rdc-badge score ${scoreClass(p.rdc[0])}" title="RDC Ene">E:${pct(p.rdc[0])}</span>`:''}
           ${p.rdc[1]?`<span class="rdc-badge score ${scoreClass(p.rdc[1])}" title="RDC Feb">F:${pct(p.rdc[1])}</span>`:''}
           ${p.rdc[2]!=null?`<span class="rdc-badge score ${scoreClass(p.rdc[2])}" title="RDC Mar">M:${pct(p.rdc[2])}</span>`:''}
+          ${p.rdc[3]!=null?`<span class="rdc-badge score ${scoreClass(p.rdc[3])}" title="RDC Abr">A:${pct(p.rdc[3])}</span>`:''}
         </div>
       </div>
       <div class="card-comps-label">Competencias en coaching</div>
