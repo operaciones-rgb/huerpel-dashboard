@@ -221,6 +221,7 @@ tbody td:first-child { text-align: left; font-weight: 600; color: #111827; }
     <button class="tab-btn active" onclick="showView('overview')">Resumen</button>
     <button class="tab-btn" onclick="showView('coaching')">Coaching</button>
     <button class="tab-btn" onclick="showView('pax')">Eval. PAX 360°</button>
+    <button class="tab-btn" onclick="showView('pipeline')">Pipeline de Talento</button>
   </div>
   <div class="nav-date">Junio 2026</div>
 </nav>
@@ -356,6 +357,82 @@ tbody td:first-child { text-align: left; font-weight: 600; color: #111827; }
       </tr></thead>
       <tbody id="pax-table"></tbody>
     </table>
+  </div>
+</div>
+
+
+<!-- ===================== PIPELINE ===================== -->
+<div id="view-pipeline" class="view">
+  <div class="page-header">
+    <h1>Pipeline de Talento</h1>
+    <p>Candidatos identificados para cobertura de posiciones clave · Datos: RDC + 360° Coaching + PAX</p>
+    <div class="accent-line"></div>
+  </div>
+
+  <!-- Legend -->
+  <div style="display:flex;gap:24px;flex-wrap:wrap;margin-bottom:28px;align-items:center;font-size:0.82rem;color:#6B7280">
+    <div style="display:flex;align-items:center;gap:8px"><div style="width:12px;height:12px;border-radius:3px;background:#16A34A"></div>Listo en 0–6 meses</div>
+    <div style="display:flex;align-items:center;gap:8px"><div style="width:12px;height:12px;border-radius:3px;background:#D97706"></div>En desarrollo · 6–18 meses</div>
+    <div style="display:flex;align-items:center;gap:8px"><div style="width:12px;height:12px;border-radius:3px;background:#C0392B"></div>Requiere plan de acción antes de considerar</div>
+  </div>
+
+  <!-- NIVEL 2: Director de Zona -->
+  <div style="margin-bottom:40px">
+    <div style="background:#1E3A8A;border-radius:10px;padding:14px 20px;margin-bottom:20px;display:flex;align-items:center;justify-content:space-between">
+      <div>
+        <div style="font-family:'Syne',sans-serif;font-size:1rem;font-weight:800;color:#fff">NIVEL 2 · DIRECTOR DE ZONA</div>
+        <div style="font-size:0.8rem;color:rgba(255,255,255,0.6);margin-top:3px">Candidatos desde Gerente de Ventas</div>
+      </div>
+      <div style="background:rgba(255,255,255,0.12);border-radius:6px;padding:6px 14px;font-size:0.78rem;color:#fff;font-weight:600">9 candidatos evaluados</div>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr>
+          <th style="text-align:left">Candidato</th>
+          <th>Director actual</th>
+          <th>RDC Prom.</th>
+          <th>Tendencia</th>
+          <th>360° Prom.</th>
+          <th>PAX 360°</th>
+          <th>Coaching activo</th>
+          <th>Preparación</th>
+          <th>Brecha principal</th>
+        </tr></thead>
+        <tbody id="pipeline-zona"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- NIVEL 1: Director Comercial -->
+  <div style="margin-bottom:40px">
+    <div style="background:#C0392B;border-radius:10px;padding:14px 20px;margin-bottom:20px;display:flex;align-items:center;justify-content:space-between">
+      <div>
+        <div style="font-family:'Syne',sans-serif;font-size:1rem;font-weight:800;color:#fff">NIVEL 1 · DIRECTOR COMERCIAL</div>
+        <div style="font-size:0.8rem;color:rgba(255,255,255,0.7);margin-top:3px">Candidatos desde Director de Zona</div>
+      </div>
+      <div style="background:rgba(255,255,255,0.15);border-radius:6px;padding:6px 14px;font-size:0.78rem;color:#fff;font-weight:600">3 candidatos evaluados</div>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr>
+          <th style="text-align:left">Candidato</th>
+          <th>Puesto actual</th>
+          <th>RDC Prom.</th>
+          <th>Tendencia</th>
+          <th>360° Prom.</th>
+          <th>PAX 360°</th>
+          <th>Coaching activo</th>
+          <th>Preparación</th>
+          <th>Brecha principal</th>
+        </tr></thead>
+        <tbody id="pipeline-comercial"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Nota metodológica -->
+  <div style="background:#EFF6FF;border:1px solid #BFDBFE;border-radius:8px;padding:14px 18px;font-size:0.82rem;color:#1E3A8A;line-height:1.6">
+    <strong>Nota metodológica:</strong> La preparación se califica cruzando tres fuentes: (1) RDC promedio de los últimos 5 meses como indicador de resultados de negocio, (2) promedio del 360° de coaching como indicador de desarrollo de competencias, y (3) evaluación PAX como indicador de valores y cultura. La clasificación es orientativa — la decisión final corresponde a la Dirección Comercial.
   </div>
 </div>
 
@@ -596,10 +673,109 @@ function showView(id) {
   event.target.classList.add('active');
 }
 
+
+// ── PIPELINE DATA ────────────────────────────────────────────────────────────
+
+const paxScores = {
+  "Argenis Rodriguez": 9.60,
+  "Cristofer Torres": 8.45,
+  "Janet Ramirez": 9.80,
+  "Dario Oronzor": 9.42,
+  "Leonardo Wallace": 8.28,
+  "Emilio Cajica": 9.00,
+  "Angeles Basilio": 9.24,
+  "Viridiana Rivera": null,
+  "Laura González": 8.72,
+  "Raquel Robert": 8.53,
+  "Cristian Mendez": 9.35,
+  "Mauricio Garcia": 9.37,
+};
+
+const brecha = {
+  "Argenis Rodriguez": "Iniciativa/Proactividad · visibilidad fuera de su PMA",
+  "Cristofer Torres": "Comunicación · consistencia en resultados (alta variabilidad)",
+  "Janet Ramirez": "Análisis · gestión de múltiples equipos simultáneos",
+  "Dario Oronzor": "Análisis · consistencia mensual",
+  "Leonardo Wallace": "Comunicación · RDC bajo y volátil en últimos meses",
+  "Emilio Cajica": "Agenda · RDC históricamente bajo",
+  "Angeles Basilio": "Iniciativa/Proactividad · RDC en caída",
+  "Viridiana Rivera": "Agenda · RDC en caída sostenida (96% → 83%)",
+  "Laura González": "Agenda · RDC crítico en mayo (61%)",
+  "Raquel Robert": "Análisis + Comunicación · escalar de zona a visión comercial",
+  "Cristian Mendez": "Análisis · RDC históricamente por debajo del 90%",
+  "Mauricio Garcia": "Delegación/Empoderamiento · RDC de equipo en caída crítica",
+};
+
+function rdcProm(rdcArr) {
+  const v = rdcArr.filter(x => x != null);
+  return v.length ? v.reduce((a,b)=>a+b,0)/v.length : null;
+}
+
+function readinessLevel(rdcAvg, avg360, pax) {
+  const score = (rdcAvg || 0) * 0.4 + (avg360 || 0) * 0.35 + ((pax ? pax/10 : 0)) * 0.25;
+  if (score >= 0.88) return { label: "Listo 0–6m", color: "#16A34A", bg: "#DCFCE7" };
+  if (score >= 0.76) return { label: "En desarrollo 6–18m", color: "#D97706", bg: "#FEF9C3" };
+  return { label: "Requiere plan", color: "#C0392B", bg: "#FEE2E2" };
+}
+
+function trendArrow(rdcArr) {
+  const v = rdcArr.filter(x => x != null);
+  if (v.length < 2) return { arrow: '—', color: '#9CA3AF' };
+  const last = v[v.length-1], prev = v[v.length-2];
+  const isUp = last >= prev;
+  if (isUp) return { arrow: '↑', color: '#16A34A' };
+  if (last >= 0.90) return { arrow: '↓', color: 'rgba(0,0,0,0.25)' };
+  if (last >= 0.75) return { arrow: '↓', color: '#D97706' };
+  return { arrow: '↓', color: '#C0392B' };
+}
+
+function buildPipelineTable(containerId, names) {
+  const tbody = document.getElementById(containerId);
+  names.forEach(name => {
+    const p = people.find(x => x.name === name);
+    if (!p) return;
+
+    const rdcAvg = rdcProm(p.rdc);
+    const avg360 = overallAvg(p);
+    const pax = paxScores[name];
+    const readiness = readinessLevel(rdcAvg, avg360, pax);
+    const trend = trendArrow(p.rdc);
+    const dir = directorMap[name] || p.puesto;
+    const coachingTags = p.yellow.length
+      ? p.yellow.map(c => `<span style="background:#FEF3C7;color:#92400E;border:1px solid #FCD34D;padding:2px 7px;border-radius:12px;font-size:0.7rem;font-weight:600;white-space:nowrap">${c}</span>`).join(' ')
+      : '<span style="color:#9CA3AF;font-size:0.78rem">Sin definir</span>';
+
+    tbody.innerHTML += `<tr>
+      <td style="font-weight:700;color:#111827">${name}</td>
+      <td><span style="font-size:0.78rem;color:#6B7280">${dir}</span></td>
+      <td><span class="score ${rdcAvg>=.9?'score-green':rdcAvg>=.75?'score-yellow':'score-red'}">${rdcAvg!=null?Math.round(rdcAvg*100)+'%':'—'}</span></td>
+      <td style="font-size:1.1rem;font-weight:700;color:${trend.color}">${trend.arrow}</td>
+      <td><span class="score ${avg360>=.9?'score-green':avg360>=.75?'score-yellow':'score-red'}">${avg360!=null?Math.round(avg360*100)+'%':'—'}</span></td>
+      <td><span class="score ${pax>=9.5?'score-green':pax>=8.5?'score-yellow':pax?'score-red':''}"> ${pax?pax.toFixed(1)+'/10':'—'}</span></td>
+      <td>${coachingTags}</td>
+      <td><span style="background:${readiness.bg};color:${readiness.color};border:1px solid ${readiness.color};padding:4px 10px;border-radius:20px;font-size:0.75rem;font-weight:700;white-space:nowrap">${readiness.label}</span></td>
+      <td style="font-size:0.78rem;color:#6B7280;max-width:220px">${brecha[name]||'—'}</td>
+    </tr>`;
+  });
+}
+
+function buildPipeline() {
+  buildPipelineTable('pipeline-zona', [
+    "Janet Ramirez", "Argenis Rodriguez", "Dario Oronzor",
+    "Cristofer Torres", "Emilio Cajica", "Angeles Basilio",
+    "Viridiana Rivera", "Leonardo Wallace", "Laura González"
+  ]);
+  buildPipelineTable('pipeline-comercial', [
+    "Raquel Robert", "Cristian Mendez", "Mauricio Garcia"
+  ]);
+}
+
+
 // Init
 buildOverview();
 buildCoachingCards();
 buildPax();
+buildPipeline();
 </script>
 </body>
 </html>
