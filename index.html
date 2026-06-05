@@ -222,7 +222,7 @@ tbody td:first-child { text-align: left; font-weight: 600; color: #111827; }
     <button class="tab-btn" onclick="showView('coaching')">Coaching</button>
     <button class="tab-btn" onclick="showView('pax')">Eval. PAX 360°</button>
   </div>
-  <div class="nav-date">Mayo 2026</div>
+  <div class="nav-date">Junio 2026</div>
 </nav>
 
 <!-- ===================== OVERVIEW ===================== -->
@@ -240,6 +240,7 @@ tbody td:first-child { text-align: left; font-weight: 600; color: #111827; }
     <div class="kpi" style="--kpi-color: #E8A130"><div class="kpi-value">82%</div><div class="kpi-label">RDC prom. Febrero 2026</div></div>
     <div class="kpi" style="--kpi-color: #D97706"><div class="kpi-value">77%</div><div class="kpi-label">RDC prom. Marzo 2026</div></div>
     <div class="kpi" style="--kpi-color: #D97706"><div class="kpi-value">87%</div><div class="kpi-label">RDC prom. Abril 2026</div></div>
+    <div class="kpi" style="--kpi-color: #1E3A8A"><div class="kpi-value">88%</div><div class="kpi-label">RDC prom. Junio 2026</div></div>
   </div>
 
   <div class="section-title">Competencias más trabajadas en coaching <span>HUERPEL 2026</span></div>
@@ -270,7 +271,7 @@ tbody td:first-child { text-align: left; font-weight: 600; color: #111827; }
     <button class="filter-btn" onclick="filterOverview('Cristian Mendez', this)">Cristian Méndez</button>
     <button class="filter-btn" onclick="filterOverview('Mauricio Garcia', this)">Mauricio Garcia</button>
   </div>
-  <div class="section-title">Resultados RDC · Todos los coachees <span>Ene–Abr 2026</span></div>
+  <div class="section-title">Resultados RDC · Todos los coachees <span>Ene–May 2026</span></div>
   <div class="legend">
     <div class="legend-item"><div class="legend-dot" style="background:#5DFFA8"></div> ≥ 90% Objetivo</div>
     <div class="legend-item"><div class="legend-dot" style="background:#F5C842"></div> 75–89% En proceso</div>
@@ -286,6 +287,7 @@ tbody td:first-child { text-align: left; font-weight: 600; color: #111827; }
         <th>RDC Febrero</th>
         <th>RDC Marzo</th>
         <th>RDC Abril</th>
+        <th>RDC Mayo</th>
         <th>Tendencia</th>
         <th>Competencias en proceso</th>
       </tr></thead>
@@ -360,33 +362,33 @@ tbody td:first-child { text-align: left; font-weight: 600; color: #111827; }
 
 <script>
 const people = [
-  {name:"Viridiana Rivera", puesto:"Gerente de Ventas", rdc:[.93,.96,.71,.74], yellow:["AGENDA","COMUNICACIÓN"],
+  {name:"Viridiana Rivera", puesto:"Directora", rdc:[.93,.96,.71,.74,.83], yellow:["AGENDA","COMUNICACIÓN"],
    scores:{ANÁLISIS:[1,.75,.63,.83],"INICIATIVA/PROACTIVIDAD":[.75,.75,.88,.92],AGENDA:[1,.5,.75,.92],COMUNICACIÓN:[.75,.5,.63,1],CONFIANZA:[1,1,.88,.92],"DELEGACIÓN/EMPODERAMIENTO":[1,.5,.63,.92],DESARROLLO:[1,.75,.75,.92]}},
-  {name:"Laura González", puesto:"Gerente de Ventas", rdc:[.99,.9,.67,.72], yellow:["AGENDA","DESARROLLO"],
+  {name:"Laura González", puesto:"Gerente de Ventas", rdc:[.99,.9,.67,.72,.61], yellow:["AGENDA","DESARROLLO"],
    scores:{ANÁLISIS:[.75,.75,.63,.25],"INICIATIVA/PROACTIVIDAD":[1,1,.88,.08],AGENDA:[.75,.5,.63,.42],COMUNICACIÓN:[.75,.75,.63,.17],CONFIANZA:[.75,.75,.88,.25],"DELEGACIÓN/EMPODERAMIENTO":[1,.5,.63,.33],DESARROLLO:[1,1,.88,.25]}},
-  {name:"Leonardo Wallace", puesto:"Gerente de Ventas", rdc:[1.0,.82,.63,.89], yellow:["COMUNICACIÓN","DESARROLLO"],
+  {name:"Leonardo Wallace", puesto:"Gerente de Ventas", rdc:[1.0,.82,.63,.89,.83], yellow:["COMUNICACIÓN","DESARROLLO"],
    scores:{ANÁLISIS:[1,1,.5,1],"INICIATIVA/PROACTIVIDAD":[1,1,.63,1],AGENDA:[1,1,.5,1],COMUNICACIÓN:[1,.5,.75,1],CONFIANZA:[1,.5,.75,1],"DELEGACIÓN/EMPODERAMIENTO":[.75,.75,.75,1],DESARROLLO:[.75,.75,.75,1]}},
-  {name:"Argenis Rodriguez", puesto:"Gerente de Ventas", rdc:[.98,.97,.94,.92], yellow:["INICIATIVA/PROACTIVIDAD","DESARROLLO"],
+  {name:"Argenis Rodriguez", puesto:"Gerente de Ventas", rdc:[.98,.97,.94,.92,.89], yellow:["INICIATIVA/PROACTIVIDAD","DESARROLLO"],
    scores:{ANÁLISIS:[.75,.5,.92,.81],"INICIATIVA/PROACTIVIDAD":[0,.25,.75,.69],AGENDA:[.5,.5,.83,.75],COMUNICACIÓN:[.75,.75,.83,.75],CONFIANZA:[1,.75,.92,.69],"DELEGACIÓN/EMPODERAMIENTO":[.5,.5,.83,.63],DESARROLLO:[1,.75,.83,.75]}},
-  {name:"Cristian Mendez", puesto:"Director Nuevos", rdc:[.8533,.6867,.67,.8933], yellow:["ANÁLISIS"],
+  {name:"Cristian Mendez", puesto:"Director Nuevos", rdc:[.8533,.6867,.67,.8933,.8733], yellow:["ANÁLISIS"],
    scores:{ANÁLISIS:[1,.5,.75,.94],"INICIATIVA/PROACTIVIDAD":[1,.75,1,1],AGENDA:[1,.75,1,1],COMUNICACIÓN:[1,1,.88,1],CONFIANZA:[1,.75,1,.94],"DELEGACIÓN/EMPODERAMIENTO":[1,.75,.88,.94],DESARROLLO:[1,.75,1,.94]}},
-  {name:"Raquel Robert", puesto:"Directora Nuevos", rdc:[.945,.9175,.9275,.9275], yellow:["ANÁLISIS","COMUNICACIÓN"],
+  {name:"Raquel Robert", puesto:"Directora Nuevos", rdc:[.945,.9175,.9275,.9275,.97], yellow:["ANÁLISIS","COMUNICACIÓN"],
    scores:{ANÁLISIS:[.75,.5,.88,1],"INICIATIVA/PROACTIVIDAD":[.75,.5,.75,1],AGENDA:[.5,.75,.75,1],COMUNICACIÓN:[.5,.75,.88,.94],CONFIANZA:[.75,.5,.88,1],"DELEGACIÓN/EMPODERAMIENTO":[.75,.5,.88,.94],DESARROLLO:[1,.75,.88,.94]}},
-  {name:"Fernando Villa", puesto:"Coordinador", rdc:[.9385,.5846,.54,.82], yellow:["ANÁLISIS","COMUNICACIÓN"],
+  {name:"Fernando Villa", puesto:"Coordinador", rdc:[.9385,.5846,.54,.82,.86], yellow:["ANÁLISIS","COMUNICACIÓN"],
    scores:{ANÁLISIS:[.75,.75,.75,.75],"INICIATIVA/PROACTIVIDAD":[1,.75,1,.5],AGENDA:[.75,.25,.75,.5],COMUNICACIÓN:[.5,.25,.25,.75],CONFIANZA:[.75,.25,.75,.63],"DELEGACIÓN/EMPODERAMIENTO":[.75,.5,.75,.88],DESARROLLO:[.75,.25,1,.75]}},
-  {name:"Dario Oronzor", puesto:"Gerente de Ventas", rdc:[.9,.79,.88,.90], yellow:["ANÁLISIS","COMUNICACIÓN"],
+  {name:"Dario Oronzor", puesto:"Gerente de Ventas", rdc:[.9,.79,.88,.90,.95], yellow:["ANÁLISIS","COMUNICACIÓN"],
    scores:{ANÁLISIS:[.5,.75,.75,1],"INICIATIVA/PROACTIVIDAD":[.75,.5,.75,1],AGENDA:[.5,.75,.92,1],COMUNICACIÓN:[.5,.75,.75,1],CONFIANZA:[.75,1,.83,1],"DELEGACIÓN/EMPODERAMIENTO":[.75,.75,1,1],DESARROLLO:[.5,.75,.92,1]}},
-  {name:"Maricela Lima", puesto:"Coordinador", rdc:[1.25,1.19,.92,1.02], yellow:["ANÁLISIS","COMUNICACIÓN"],
+  {name:"Maricela Lima", puesto:"Coordinador", rdc:[1.25,1.19,.92,1.02,1.02], yellow:["ANÁLISIS","COMUNICACIÓN"],
    scores:{ANÁLISIS:[1,.75,.75,1],"INICIATIVA/PROACTIVIDAD":[1,.75,.5,.88],AGENDA:[1,.5,.75,.75],COMUNICACIÓN:[.75,.25,.5,1],CONFIANZA:[1,1,.75,1],"DELEGACIÓN/EMPODERAMIENTO":[1,.75,.5,1],DESARROLLO:[1,.5,.75,1]}},
-  {name:"Janet Ramirez", puesto:"Gerente de Ventas", rdc:[.97,.99,.99,.95], yellow:["ANÁLISIS","DESARROLLO"],
+  {name:"Janet Ramirez", puesto:"Gerente de Ventas", rdc:[.97,.99,.99,.95,1.01], yellow:["ANÁLISIS","DESARROLLO"],
    scores:{ANÁLISIS:[.75,.75,.92,.75],"INICIATIVA/PROACTIVIDAD":[.75,1,.83,.67],AGENDA:[1,.75,.92,1],COMUNICACIÓN:[.75,.75,.92,.83],CONFIANZA:[1,1,.92,.83],"DELEGACIÓN/EMPODERAMIENTO":[.75,.75,1,.83],DESARROLLO:[.75,.75,.83,.75]}},
-  {name:"Mauricio Garcia", puesto:"Director Nuevos", rdc:[.96,.93,.69,.73], yellow:["AGENDA","DELEGACIÓN/EMPODERAMIENTO"],
+  {name:"Mauricio Garcia", puesto:"Director Nuevos", rdc:[.96,.93,.69,.73,.72], yellow:["AGENDA","DELEGACIÓN/EMPODERAMIENTO"],
    scores:{ANÁLISIS:[1,1,.88,1],"INICIATIVA/PROACTIVIDAD":[1,.75,.88,1],AGENDA:[1,.25,1,1],COMUNICACIÓN:[1,.75,.88,.88],CONFIANZA:[1,1,.88,1],"DELEGACIÓN/EMPODERAMIENTO":[1,0,.88,1],DESARROLLO:[1,1,.88,1]}},
-  {name:"Emilio Cajica", puesto:"Gerente de Ventas", rdc:[.71,.61,.86,.92], yellow:["AGENDA","DESARROLLO"],
+  {name:"Emilio Cajica", puesto:"Gerente de Ventas", rdc:[.71,.61,.86,.92,.96], yellow:["AGENDA","DESARROLLO"],
    scores:{ANÁLISIS:[.75,.75,.67,.7],"INICIATIVA/PROACTIVIDAD":[.75,1,.75,.8],AGENDA:[.5,.5,.58,.7],COMUNICACIÓN:[.75,1,.92,.95],CONFIANZA:[.75,1,.75,.7],"DELEGACIÓN/EMPODERAMIENTO":[.25,.5,.83,.85],DESARROLLO:[.75,.75,.75,.65]}},
-  {name:"Angeles Basilio", puesto:"Gerente de Ventas", rdc:[.85,.63,.52,.87], yellow:["INICIATIVA / PROACTIVIDAD","AGENDA"],
+  {name:"Angeles Basilio", puesto:"Gerente de Ventas", rdc:[.85,.63,.52,.87,.83], yellow:["INICIATIVA / PROACTIVIDAD","AGENDA"],
    scores:{ANÁLISIS:[.75,.75,.75,.92],"INICIATIVA/PROACTIVIDAD":[1,.5,.58,.83],AGENDA:[.5,.5,.75,.83],COMUNICACIÓN:[.75,1,.83,.92],CONFIANZA:[1,1,.83,.92],"DELEGACIÓN/EMPODERAMIENTO":[.75,1,.92,1],DESARROLLO:[.75,.75,.75,.92]}},
-  {name:"Cristofer Torres", puesto:"Gerente de Ventas", rdc:[.93,.92,.90,.94], yellow:["AGENDA","COMUNICACIÓN"],
+  {name:"Cristofer Torres", puesto:"Gerente de Ventas", rdc:[.93,.92,.90,.94,1.03], yellow:["AGENDA","COMUNICACIÓN"],
    scores:{ANÁLISIS:[1,.5,.67,1],"INICIATIVA/PROACTIVIDAD":[1,.75,.92,1],AGENDA:[1,.5,.67,1],COMUNICACIÓN:[1,.75,.83,1],CONFIANZA:[1,.5,.83,1],"DELEGACIÓN/EMPODERAMIENTO":[1,1,.83,1],DESARROLLO:[1,.75,.75,1]}},
 ];
 
@@ -451,8 +453,8 @@ function paxScore(v) {
 function buildOverview() {
   const tbody = document.getElementById('overview-table');
   people.forEach(p => {
-    const rdcE = p.rdc[0], rdcF = p.rdc[1], rdcM = p.rdc[2], rdcA = p.rdc[3];
-    const lastVals = [rdcM, rdcA].filter(v=>v!=null);
+    const rdcE = p.rdc[0], rdcF = p.rdc[1], rdcM = p.rdc[2], rdcA = p.rdc[3], rdcMay = p.rdc[4];
+    const lastVals = [rdcM, rdcA, rdcMay].filter(v=>v!=null);
     const prev = lastVals.length >= 2 ? lastVals[lastVals.length-2] : (rdcM != null ? rdcF : rdcE);
     const curr = lastVals.length >= 1 ? lastVals[lastVals.length-1] : rdcF;
     const isUp = curr >= prev;
@@ -475,6 +477,7 @@ function buildOverview() {
       <td>${scoreHTML(rdcF)}</td>
       <td>${rdcM != null ? scoreHTML(rdcM) : '<span class="score-none">—</span>'}</td>
       <td>${rdcA != null ? scoreHTML(rdcA) : '<span class="score-none">—</span>'}</td>
+      <td>${rdcMay != null ? scoreHTML(rdcMay) : '<span class="score-none">—</span>'}</td>
       <td style="color:${tendColor};font-size:1.1rem;font-weight:700">${tend}</td>
       <td style="text-align:left">${comps}</td>
     </tr>`;
@@ -520,6 +523,7 @@ function buildCoachingCards() {
           ${p.rdc[1]?`<span class="rdc-badge score ${scoreClass(p.rdc[1])}" title="RDC Feb">F:${pct(p.rdc[1])}</span>`:''}
           ${p.rdc[2]!=null?`<span class="rdc-badge score ${scoreClass(p.rdc[2])}" title="RDC Mar">M:${pct(p.rdc[2])}</span>`:''}
           ${p.rdc[3]!=null?`<span class="rdc-badge score ${scoreClass(p.rdc[3])}" title="RDC Abr">A:${pct(p.rdc[3])}</span>`:''}
+          ${p.rdc[4]!=null?`<span class="rdc-badge score ${scoreClass(p.rdc[4])}" title="RDC May">M:${pct(p.rdc[4])}</span>`:''}
         </div>
       </div>
       <div class="card-comps-label">Competencias en coaching</div>
