@@ -223,7 +223,7 @@ tbody td:first-child { text-align: left; font-weight: 600; color: #111827; }
     <button class="tab-btn" onclick="showView('pax')">Eval. PAX 360°</button>
     <button class="tab-btn" onclick="showView('pipeline')">Pipeline de Talento</button>
   </div>
-  <div class="nav-date">Junio 2026</div>
+  <div class="nav-date">Julio 2026</div>
 </nav>
 
 <!-- ===================== OVERVIEW ===================== -->
@@ -392,7 +392,8 @@ tbody td:first-child { text-align: left; font-weight: 600; color: #111827; }
         <thead><tr>
           <th style="text-align:left">Candidato</th>
           <th>Director actual</th>
-          <th>RDC Prom.</th>
+          <th>RDC Prom.<br><span style="font-weight:400;font-size:0.65rem;opacity:0.7">6 meses</span></th>
+          <th>Prom. Móvil<br><span style="font-weight:400;font-size:0.65rem;opacity:0.7">últimos 3 m.</span></th>
           <th>Tendencia</th>
           <th>360° Prom.</th>
           <th>PAX 360°</th>
@@ -419,7 +420,8 @@ tbody td:first-child { text-align: left; font-weight: 600; color: #111827; }
         <thead><tr>
           <th style="text-align:left">Candidato</th>
           <th>Puesto actual</th>
-          <th>RDC Prom.</th>
+          <th>RDC Prom.<br><span style="font-weight:400;font-size:0.65rem;opacity:0.7">6 meses</span></th>
+          <th>Prom. Móvil<br><span style="font-weight:400;font-size:0.65rem;opacity:0.7">últimos 3 m.</span></th>
           <th>Tendencia</th>
           <th>360° Prom.</th>
           <th>PAX 360°</th>
@@ -441,7 +443,7 @@ tbody td:first-child { text-align: left; font-weight: 600; color: #111827; }
 
 <script>
 const people = [
-  {name:"Viridiana Rivera", puesto:"Gerente de Ventas", rdc:[.93,.96,.71,.74,.83,.72], yellow:["AGENDA","COMUNICACIÓN"],
+  {name:"Viridiana Rivera", puesto:"Directora", rdc:[.93,.96,.71,.74,.83,.72], yellow:["AGENDA","COMUNICACIÓN"],
    scores:{ANÁLISIS:[1,.75,.63,.83],"INICIATIVA/PROACTIVIDAD":[.75,.75,.88,.92],AGENDA:[1,.5,.75,.92],COMUNICACIÓN:[.75,.5,.63,1],CONFIANZA:[1,1,.88,.92],"DELEGACIÓN/EMPODERAMIENTO":[1,.5,.63,.92],DESARROLLO:[1,.75,.75,.92]}},
   {name:"Laura González", puesto:"Gerente de Ventas", rdc:[.99,.9,.67,.72,.61,.65], yellow:["AGENDA","DESARROLLO"],
    scores:{ANÁLISIS:[.75,.75,.63,.25],"INICIATIVA/PROACTIVIDAD":[1,1,.88,.08],AGENDA:[.75,.5,.63,.42],COMUNICACIÓN:[.75,.75,.63,.17],CONFIANZA:[.75,.75,.88,.25],"DELEGACIÓN/EMPODERAMIENTO":[1,.5,.63,.33],DESARROLLO:[1,1,.88,.25]}},
@@ -715,6 +717,12 @@ function rdcProm(rdcArr) {
   return v.length ? v.reduce((a,b)=>a+b,0)/v.length : null;
 }
 
+function rdcProm3(rdcArr) {
+  const v = rdcArr.filter(x => x != null);
+  const last3 = v.slice(-3);
+  return last3.length ? last3.reduce((a,b)=>a+b,0)/last3.length : null;
+}
+
 function readinessLevel(rdcAvg, avg360, pax) {
   const score = (rdcAvg || 0) * 0.4 + (avg360 || 0) * 0.35 + ((pax ? pax/10 : 0)) * 0.25;
   if (score >= 0.88) return { label: "Listo 0–6m", color: "#16A34A", bg: "#DCFCE7" };
@@ -742,17 +750,19 @@ function buildPipelineTable(containerId, names) {
     const rdcAvg = rdcProm(p.rdc);
     const avg360 = overallAvg(p);
     const pax = paxScores[name];
-    const readiness = readinessLevel(rdcAvg, avg360, pax);
+    const readiness = readinessLevel(rdcAvg3 ?? rdcAvg, avg360, pax);
     const trend = trendArrow(p.rdc);
     const dir = directorMap[name] || p.puesto;
     const coachingTags = p.yellow.length
       ? p.yellow.map(c => `<span style="background:#FEF3C7;color:#92400E;border:1px solid #FCD34D;padding:2px 7px;border-radius:12px;font-size:0.7rem;font-weight:600;white-space:nowrap">${c}</span>`).join(' ')
       : '<span style="color:#9CA3AF;font-size:0.78rem">Sin definir</span>';
 
+    const rdcAvg3 = rdcProm3(p.rdc);
     tbody.innerHTML += `<tr>
       <td style="font-weight:700;color:#111827">${name}</td>
       <td><span style="font-size:0.78rem;color:#6B7280">${dir}</span></td>
       <td><span class="score ${rdcAvg>=.9?'score-green':rdcAvg>=.75?'score-yellow':'score-red'}">${rdcAvg!=null?Math.round(rdcAvg*100)+'%':'—'}</span></td>
+      <td><span class="score ${rdcAvg3>=.9?'score-green':rdcAvg3>=.75?'score-yellow':'score-red'}" style="font-weight:800">${rdcAvg3!=null?Math.round(rdcAvg3*100)+'%':'—'}</span></td>
       <td style="font-size:1.1rem;font-weight:700;color:${trend.color}">${trend.arrow}</td>
       <td><span class="score ${avg360>=.9?'score-green':avg360>=.75?'score-yellow':'score-red'}">${avg360!=null?Math.round(avg360*100)+'%':'—'}</span></td>
       <td><span class="score ${pax>=9.5?'score-green':pax>=8.5?'score-yellow':pax?'score-red':''}"> ${pax?pax.toFixed(1)+'/10':'—'}</span></td>
