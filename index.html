@@ -86,7 +86,7 @@ tbody td:first-child { text-align: left; font-weight: 600; color: #111827; }
     <button class="tab-btn" onclick="showView('pax')">Eval. PAX 360°</button>
     <button class="tab-btn" onclick="showView('pipeline')">Pipeline de Talento</button>
   </div>
-  <div class="nav-date">Agosto 2026</div>
+  <div class="nav-date">Septiembre 2026</div>
 </nav>
 
 <!-- OVERVIEW -->
@@ -105,6 +105,7 @@ tbody td:first-child { text-align: left; font-weight: 600; color: #111827; }
     <div class="kpi" style="--kpi-color:#D97706"><div class="kpi-value">88%</div><div class="kpi-label">RDC prom. Mayo 2026</div></div>
     <div class="kpi" style="--kpi-color:#C0392B"><div class="kpi-value">76%</div><div class="kpi-label">RDC prom. Junio 2026</div></div>
     <div class="kpi" style="--kpi-color:#16A34A"><div class="kpi-value">95%</div><div class="kpi-label">RDC prom. Julio 2026</div></div>
+    <div class="kpi" style="--kpi-color:#16A34A"><div class="kpi-value">94%</div><div class="kpi-label">RDC prom. Agosto 2026</div></div>
   </div>
   <div class="section-title">Competencias más trabajadas en coaching <span>HUERPEL 2026</span></div>
   <div class="table-wrap" style="margin-bottom:36px">
@@ -115,8 +116,8 @@ tbody td:first-child { text-align: left; font-weight: 600; color: #111827; }
       <tbody>
         <tr><td>Análisis</td><td><span class="score score-yellow">6</span></td><td style="font-size:0.75rem;color:#6B7280">Cristian, Raquel, Dario, Maricela, Janet + 1</td><td><span class="score score-yellow">40%</span></td></tr>
         <tr><td>Comunicación</td><td><span class="score score-yellow">5</span></td><td style="font-size:0.75rem;color:#6B7280">Viridiana, Leonardo, Raquel, Dario, Maricela</td><td><span class="score score-yellow">33%</span></td></tr>
-        <tr><td>Desarrollo</td><td><span class="score score-green">4</span></td><td style="font-size:0.75rem;color:#6B7280">Laura, Leonardo, Argenis, Janet</td><td><span class="score score-green">27%</span></td></tr>
-        <tr><td>Agenda</td><td><span class="score score-green">4</span></td><td style="font-size:0.75rem;color:#6B7280">Viridiana, Laura, Mauricio + 1</td><td><span class="score score-green">27%</span></td></tr>
+        <tr><td>Desarrollo</td><td><span class="score score-green">4</span></td><td style="font-size:0.75rem;color:#6B7280">Leonardo, Argenis, Janet</td><td><span class="score score-green">27%</span></td></tr>
+        <tr><td>Agenda</td><td><span class="score score-green">4</span></td><td style="font-size:0.75rem;color:#6B7280">Viridiana, Mauricio + 1</td><td><span class="score score-green">27%</span></td></tr>
         <tr><td>Iniciativa / Proactividad</td><td><span class="score score-red">1</span></td><td style="font-size:0.75rem;color:#6B7280">Argenis Rodriguez</td><td><span class="score score-red">7%</span></td></tr>
         <tr><td>Delegación / Empoderamiento</td><td><span class="score score-red">1</span></td><td style="font-size:0.75rem;color:#6B7280">Mauricio Garcia</td><td><span class="score score-red">7%</span></td></tr>
         <tr><td>Confianza</td><td><span class="score-none">—</span></td><td style="font-size:0.75rem;color:#6B7280">No en coaching actualmente</td><td><span class="score-none">0%</span></td></tr>
@@ -130,7 +131,7 @@ tbody td:first-child { text-align: left; font-weight: 600; color: #111827; }
     <button class="filter-btn" onclick="filterOverview('Cristian Mendez',this)">Cristian Méndez</button>
     <button class="filter-btn" onclick="filterOverview('Mauricio Garcia',this)">Mauricio Garcia</button>
   </div>
-  <div class="section-title">Resultados RDC · Todos los coachees <span>Ene–Jul 2026</span></div>
+  <div class="section-title">Resultados RDC · Todos los coachees <span>Ene–Ago 2026</span></div>
   <div class="legend">
     <div class="legend-item"><div class="legend-dot" style="background:#15803D"></div>≥ 90% Objetivo</div>
     <div class="legend-item"><div class="legend-dot" style="background:#D97706"></div>75–89% En proceso</div>
@@ -142,6 +143,7 @@ tbody td:first-child { text-align: left; font-weight: 600; color: #111827; }
         <th style="text-align:left">Nombre</th><th>Puesto</th><th>Director a cargo</th>
         <th>RDC Ene</th><th>RDC Feb</th><th>RDC Mar</th><th>RDC Abr</th><th>RDC May</th><th>RDC Jun</th>
         <th>RDC Jul</th>
+        <th>RDC Ago</th>
         <th>Tendencia</th><th>Competencias en proceso</th>
       </tr></thead>
       <tbody id="overview-table"></tbody>
@@ -264,33 +266,31 @@ tbody td:first-child { text-align: left; font-weight: 600; color: #111827; }
 
 <script>
 const people = [
-  {name:"Viridiana Rivera", puesto:"Gerente de Ventas", rdc:[.93,.96,.71,.74,.83,.72,1.00], yellow:["AGENDA","COMUNICACIÓN"],
+  {name:"Viridiana Rivera", puesto:"Gerente de Ventas", rdc:[.93,.96,.71,.74,.83,.72,1.00,.94], yellow:["AGENDA","COMUNICACIÓN"],
    scores:{ANÁLISIS:[1,.75,.63,.83],"INICIATIVA/PROACTIVIDAD":[.75,.75,.88,.92],AGENDA:[1,.5,.75,.92],COMUNICACIÓN:[.75,.5,.63,1],CONFIANZA:[1,1,.88,.92],"DELEGACIÓN/EMPODERAMIENTO":[1,.5,.63,.92],DESARROLLO:[1,.75,.75,.92]}},
-  {name:"Laura González", puesto:"Gerente de Ventas", rdc:[.99,.9,.67,.72,.61,.65,.92], yellow:["AGENDA","DESARROLLO"],
-   scores:{ANÁLISIS:[.75,.75,.63,.25],"INICIATIVA/PROACTIVIDAD":[1,1,.88,.08],AGENDA:[.75,.5,.63,.42],COMUNICACIÓN:[.75,.75,.63,.17],CONFIANZA:[.75,.75,.88,.25],"DELEGACIÓN/EMPODERAMIENTO":[1,.5,.63,.33],DESARROLLO:[1,1,.88,.25]}},
-  {name:"Leonardo Wallace", puesto:"Gerente de Ventas", rdc:[1.0,.82,.63,.89,.83,.73,.80], yellow:["COMUNICACIÓN","DESARROLLO"],
+  {name:"Leonardo Wallace", puesto:"Gerente de Ventas", rdc:[1.0,.82,.63,.89,.83,.73,.80,.87], yellow:["COMUNICACIÓN","DESARROLLO"],
    scores:{ANÁLISIS:[1,1,.5,1],"INICIATIVA/PROACTIVIDAD":[1,1,.63,1],AGENDA:[1,1,.5,1],COMUNICACIÓN:[1,.5,.75,1],CONFIANZA:[1,.5,.75,1],"DELEGACIÓN/EMPODERAMIENTO":[.75,.75,.75,1],DESARROLLO:[.75,.75,.75,1]}},
-  {name:"Argenis Rodriguez", puesto:"Gerente de Ventas", rdc:[.98,.97,.94,.92,.89,.79,1.02], yellow:["INICIATIVA/PROACTIVIDAD","DESARROLLO"],
+  {name:"Argenis Rodriguez", puesto:"Gerente de Ventas", rdc:[.98,.97,.94,.92,.89,.79,1.02,1.02], yellow:["INICIATIVA/PROACTIVIDAD","DESARROLLO"],
    scores:{ANÁLISIS:[.75,.5,.92,.81],"INICIATIVA/PROACTIVIDAD":[0,.25,.75,.69],AGENDA:[.5,.5,.83,.75],COMUNICACIÓN:[.75,.75,.83,.75],CONFIANZA:[1,.75,.92,.69],"DELEGACIÓN/EMPODERAMIENTO":[.5,.5,.83,.63],DESARROLLO:[1,.75,.83,.75]}},
-  {name:"Cristian Mendez", puesto:"Director Nuevos", rdc:[.8533,.6867,.67,.8933,.8733,.733,.8667], yellow:["ANÁLISIS"],
+  {name:"Cristian Mendez", puesto:"Director Nuevos", rdc:[.8533,.6867,.67,.8933,.8733,.733,.8667,null], yellow:["ANÁLISIS"],
    scores:{ANÁLISIS:[1,.5,.75,.94],"INICIATIVA/PROACTIVIDAD":[1,.75,1,1],AGENDA:[1,.75,1,1],COMUNICACIÓN:[1,1,.88,1],CONFIANZA:[1,.75,1,.94],"DELEGACIÓN/EMPODERAMIENTO":[1,.75,.88,.94],DESARROLLO:[1,.75,1,.94]}},
-  {name:"Raquel Robert", puesto:"Directora Nuevos", rdc:[.945,.9175,.9275,.9275,.97,.75,1.0075], yellow:["ANÁLISIS","COMUNICACIÓN"],
+  {name:"Raquel Robert", puesto:"Directora Nuevos", rdc:[.945,.9175,.9275,.9275,.97,.75,1.0075,null], yellow:["ANÁLISIS","COMUNICACIÓN"],
    scores:{ANÁLISIS:[.75,.5,.88,1],"INICIATIVA/PROACTIVIDAD":[.75,.5,.75,1],AGENDA:[.5,.75,.75,1],COMUNICACIÓN:[.5,.75,.88,.94],CONFIANZA:[.75,.5,.88,1],"DELEGACIÓN/EMPODERAMIENTO":[.75,.5,.88,.94],DESARROLLO:[1,.75,.88,.94]}},
-  {name:"Fernando Villa", puesto:"Coordinador", rdc:[.9385,.5846,.54,.82,.86,.87,.87], yellow:["ANÁLISIS","COMUNICACIÓN"],
+  {name:"Fernando Villa", puesto:"Gerente de Ventas · PMA 528", rdc:[.9385,.5846,.54,.82,.86,.87,.87,.87], yellow:["ANÁLISIS","COMUNICACIÓN"],
    scores:{ANÁLISIS:[.75,.75,.75,.75],"INICIATIVA/PROACTIVIDAD":[1,.75,1,.5],AGENDA:[.75,.25,.75,.5],COMUNICACIÓN:[.5,.25,.25,.75],CONFIANZA:[.75,.25,.75,.63],"DELEGACIÓN/EMPODERAMIENTO":[.75,.5,.75,.88],DESARROLLO:[.75,.25,1,.75]}},
-  {name:"Dario Oronzor", puesto:"Gerente de Ventas", rdc:[.9,.79,.88,.90,.95,.68,.97], yellow:["ANÁLISIS","COMUNICACIÓN"],
+  {name:"Dario Oronzor", puesto:"Gerente de Ventas", rdc:[.9,.79,.88,.90,.95,.68,.97,.92], yellow:["ANÁLISIS","COMUNICACIÓN"],
    scores:{ANÁLISIS:[.5,.75,.75,1],"INICIATIVA/PROACTIVIDAD":[.75,.5,.75,1],AGENDA:[.5,.75,.92,1],COMUNICACIÓN:[.5,.75,.75,1],CONFIANZA:[.75,1,.83,1],"DELEGACIÓN/EMPODERAMIENTO":[.75,.75,1,1],DESARROLLO:[.5,.75,.92,1]}},
-  {name:"Maricela Lima", puesto:"Coordinador", rdc:[1.25,1.19,.92,1.02,1.02,1.00,1.06], yellow:["ANÁLISIS","COMUNICACIÓN"],
+  {name:"Maricela Lima", puesto:"BDC Comercial", rdc:[1.25,1.19,.92,1.02,1.02,1.00,1.06,.98], yellow:["ANÁLISIS","COMUNICACIÓN"],
    scores:{ANÁLISIS:[1,.75,.75,1],"INICIATIVA/PROACTIVIDAD":[1,.75,.5,.88],AGENDA:[1,.5,.75,.75],COMUNICACIÓN:[.75,.25,.5,1],CONFIANZA:[1,1,.75,1],"DELEGACIÓN/EMPODERAMIENTO":[1,.75,.5,1],DESARROLLO:[1,.5,.75,1]}},
-  {name:"Janet Ramirez", puesto:"Gerente de Ventas", rdc:[.97,.99,.99,.95,1.01,.70,1.00], yellow:["ANÁLISIS","DESARROLLO"],
+  {name:"Janet Ramirez", puesto:"Gerente de Ventas", rdc:[.97,.99,.99,.95,1.01,.70,1.00,.97], yellow:["ANÁLISIS","DESARROLLO"],
    scores:{ANÁLISIS:[.75,.75,.92,.75],"INICIATIVA/PROACTIVIDAD":[.75,1,.83,.67],AGENDA:[1,.75,.92,1],COMUNICACIÓN:[.75,.75,.92,.83],CONFIANZA:[1,1,.92,.83],"DELEGACIÓN/EMPODERAMIENTO":[.75,.75,1,.83],DESARROLLO:[.75,.75,.83,.75]}},
-  {name:"Mauricio Garcia", puesto:"Director Nuevos", rdc:[.96,.93,.69,.73,.72,.685,.96], yellow:["AGENDA","DELEGACIÓN/EMPODERAMIENTO"],
+  {name:"Mauricio Garcia", puesto:"Director Nuevos", rdc:[.96,.93,.69,.73,.72,.685,.96,null], yellow:["AGENDA","DELEGACIÓN/EMPODERAMIENTO"],
    scores:{ANÁLISIS:[1,1,.88,1],"INICIATIVA/PROACTIVIDAD":[1,.75,.88,1],AGENDA:[1,.25,1,1],COMUNICACIÓN:[1,.75,.88,.88],CONFIANZA:[1,1,.88,1],"DELEGACIÓN/EMPODERAMIENTO":[1,0,.88,1],DESARROLLO:[1,1,.88,1]}},
-  {name:"Emilio Cajica", puesto:"Gerente de Ventas", rdc:[.71,.61,.86,.92,.96,.76,.92], yellow:["AGENDA","DESARROLLO"],
+  {name:"Emilio Cajica", puesto:"Gerente de Ventas", rdc:[.71,.61,.86,.92,.96,.76,.92,1.02], yellow:["AGENDA","DESARROLLO"],
    scores:{ANÁLISIS:[.75,.75,.67,.7],"INICIATIVA/PROACTIVIDAD":[.75,1,.75,.8],AGENDA:[.5,.5,.58,.7],COMUNICACIÓN:[.75,1,.92,.95],CONFIANZA:[.75,1,.75,.7],"DELEGACIÓN/EMPODERAMIENTO":[.25,.5,.83,.85],DESARROLLO:[.75,.75,.75,.65]}},
-  {name:"Angeles Basilio", puesto:"Gerente de Ventas", rdc:[.85,.63,.52,.87,.83,.70,.88], yellow:["INICIATIVA / PROACTIVIDAD","AGENDA"],
+  {name:"Angeles Basilio", puesto:"Gerente de Ventas", rdc:[.85,.63,.52,.87,.83,.70,.88,.77], yellow:["INICIATIVA / PROACTIVIDAD","AGENDA"],
    scores:{ANÁLISIS:[.75,.75,.75,.92],"INICIATIVA/PROACTIVIDAD":[1,.5,.58,.83],AGENDA:[.5,.5,.75,.83],COMUNICACIÓN:[.75,1,.83,.92],CONFIANZA:[1,1,.83,.92],"DELEGACIÓN/EMPODERAMIENTO":[.75,1,.92,1],DESARROLLO:[.75,.75,.75,.92]}},
-  {name:"Cristofer Torres", puesto:"Gerente de Ventas", rdc:[.93,.92,.90,.94,1.03,.83,1.04], yellow:["AGENDA","COMUNICACIÓN"],
+  {name:"Cristofer Torres", puesto:"Gerente de Ventas", rdc:[.93,.92,.90,.94,1.03,.83,1.04,1.05], yellow:["AGENDA","COMUNICACIÓN"],
    scores:{ANÁLISIS:[1,.5,.67,1],"INICIATIVA/PROACTIVIDAD":[1,.75,.92,1],AGENDA:[1,.5,.67,1],COMUNICACIÓN:[1,.75,.83,1],CONFIANZA:[1,.5,.83,1],"DELEGACIÓN/EMPODERAMIENTO":[1,1,.83,1],DESARROLLO:[1,.75,.75,1]}},
 ];
 
@@ -309,7 +309,7 @@ const paxData = [
 ];
 
 const directorMap = {
-  "Fernando Villa":"Fernanda Huerta","Maricela Lima":"Fernanda Huerta",
+  "Fernando Villa":"Mauricio Garcia","Maricela Lima":"Fernanda Huerta",
   "Cristian Mendez":"Fernanda Huerta","Raquel Robert":"Fernanda Huerta","Mauricio Garcia":"Fernanda Huerta",
   "Argenis Rodriguez":"Raquel Robert","Cristofer Torres":"Raquel Robert","Janet Ramirez":"Raquel Robert","Dario Oronzor":"Raquel Robert",
   "Leonardo Wallace":"Cristian Mendez","Emilio Cajica":"Cristian Mendez","Angeles Basilio":"Cristian Mendez",
@@ -335,6 +335,7 @@ const brecha = {
   "Raquel Robert":"Análisis + Comunicación · escalar de zona a visión comercial",
   "Cristian Mendez":"Análisis · RDC históricamente por debajo del 90%",
   "Mauricio Garcia":"Delegación/Empoderamiento · RDC de equipo en caída crítica",
+  "Fernando Villa":"Primer ciclo como Gerente PMA 528 · historial previo como BDC Digital",
 };
 
 const compLabels = ["ANÁLISIS","INICIATIVA/PROACTIVIDAD","AGENDA","COMUNICACIÓN","CONFIANZA","DELEGACIÓN/EMPODERAMIENTO","DESARROLLO"];
@@ -372,8 +373,8 @@ function trendArrow(arr){
 function buildOverview(){
   const tbody=document.getElementById('overview-table');
   people.forEach(p=>{
-    const [e,f,m,a,may,jun,jul]=p.rdc;
-    const vals=[m,a,may,jun,jul].filter(v=>v!=null);
+    const [e,f,m,a,may,jun,jul,ago]=p.rdc;
+    const vals=[m,a,may,jun,jul,ago].filter(v=>v!=null);
     const prev=vals.length>=2?vals[vals.length-2]:(m!=null?f:e);
     const curr=vals.length>=1?vals[vals.length-1]:f;
     const isUp=curr>=prev;
@@ -389,6 +390,7 @@ function buildOverview(){
       <td>${scoreHTML(e)}</td><td>${scoreHTML(f)}</td><td>${scoreHTML(m)}</td>
       <td>${scoreHTML(a)}</td><td>${scoreHTML(may)}</td><td>${scoreHTML(jun)}</td>
       <td>${scoreHTML(jul)}</td>
+      <td>${scoreHTML(ago)}</td>
       <td style="color:${tc};font-size:1.1rem;font-weight:700">${ta}</td>
       <td style="text-align:left">${comps}</td>
     </tr>`;
@@ -422,6 +424,7 @@ function buildCoachingCards(){
           ${p.rdc[4]!=null?`<span class="rdc-badge score ${scoreClass(p.rdc[4])}">My:${pct(p.rdc[4])}</span>`:''}
           ${p.rdc[5]!=null?`<span class="rdc-badge score ${scoreClass(p.rdc[5])}">J:${pct(p.rdc[5])}</span>`:''}
           ${p.rdc[6]!=null?`<span class="rdc-badge score ${scoreClass(p.rdc[6])}">Jl:${pct(p.rdc[6])}</span>`:''}
+          ${p.rdc[7]!=null?`<span class="rdc-badge score ${scoreClass(p.rdc[7])}">Ag:${pct(p.rdc[7])}</span>`:''}
         </div>
       </div>
       <div class="card-comps-label">Competencias en coaching</div>
@@ -502,7 +505,7 @@ function buildPipelineTable(containerId, names){
 }
 
 function buildPipeline(){
-  buildPipelineTable('pipeline-zona',["Janet Ramirez","Argenis Rodriguez","Dario Oronzor","Cristofer Torres","Emilio Cajica","Angeles Basilio","Viridiana Rivera","Leonardo Wallace","Laura González"]);
+  buildPipelineTable('pipeline-zona',["Janet Ramirez","Argenis Rodriguez","Dario Oronzor","Cristofer Torres","Emilio Cajica","Angeles Basilio","Viridiana Rivera","Leonardo Wallace","Fernando Villa"]);
   buildPipelineTable('pipeline-comercial',["Raquel Robert","Cristian Mendez","Mauricio Garcia"]);
 }
 
