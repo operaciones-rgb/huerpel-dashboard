@@ -698,22 +698,25 @@ function buildEvaluaciones(){
     var id = name.replace(/\s+/g,'-').replace(/[^a-zA-Z0-9-]/g,'');
 
     var block = document.createElement('div');
-    block.className = 'ev-person-block';
+    block.className = 'c-card';
     block.id = 'ev-'+id;
 
-    var hdrHtml = '<div class="ev-person-header" onclick="toggleEv(\''+id+'\')">';
-    var chipsHtml = (p.yellow||[]).map(function(c){return '<span class="chip-y">'+c+'</span>';}).join(' ');
-    hdrHtml += '<div><div class="ev-pname">'+name+'</div><div class="ev-prole">'+(p.puesto||'')+'</div><div style="margin-top:5px;display:flex;flex-wrap:wrap;gap:4px;">'+chipsHtml+'</div></div>';
-    hdrHtml += '<div class="ev-summary-scores">';
-    if(hasEne) hdrHtml += '<div class="ev-score-box"><div class="ev-score-lbl">Enero 360</div><div class="ev-score-val score '+sc(eneScore)+'">'+eneScore+'%</div></div>';
-    hdrHtml += '<div class="ev-score-box"><div class="ev-score-lbl">Octubre 360</div><div class="ev-score-val score '+sc(octScore)+'">'+octScore+'%</div></div>';
-    if(delta!==null) hdrHtml += '<div class="ev-score-box"><div class="ev-score-lbl">Variaci&oacute;n</div><div class="ev-score-val '+cls(delta)+'">'+dSign(delta)+delta+'pts</div></div>';
-    hdrHtml += '<div style="margin-left:auto;font-size:1rem;color:#9CA3AF;padding-right:4px;">&#9660;</div>';
-    hdrHtml += '</div></div>';
+    var eneColor = hasEne?(eneScore>=90?'#15803D':eneScore>=75?'#92400E':'#B91C1C'):'#9CA3AF';
+    var octColor = octScore>=90?'#15803D':octScore>=75?'#92400E':'#B91C1C';
+    var dColor = delta===null?'#9CA3AF':delta>=0?'#15803D':'#B91C1C';
+    var compTags = (p.yellow||[]).map(function(c){return '<span class="c-comp-tag">★ '+c+'</span>';}).join('');
+    var hdrHtml = '<div class="c-card-header" onclick="toggleEv(\''+id+'\')">';
+    hdrHtml += '<div><div class="c-name">'+name+'</div><div class="c-role">'+(p.puesto||'')+'</div></div>';
+    hdrHtml += '<div class="c-comps">'+compTags+'</div>';
+    hdrHtml += '<div class="c-num-box"><div class="c-num-label">Enero 360&deg;</div><div class="c-num-val" style="color:'+eneColor+'">'+(hasEne?eneScore+'%':'—')+'</div></div>';
+    hdrHtml += '<div class="c-num-box"><div class="c-num-label">Octubre 360&deg;</div><div class="c-num-val" style="color:'+octColor+'">'+octScore+'%</div></div>';
+    hdrHtml += '<div class="c-num-box"><div class="c-num-label">Variaci&oacute;n</div><div class="c-num-val" style="color:'+dColor+'">'+(delta!==null?(delta>=0?'+':'')+delta+'pts':'—')+'</div></div>';
+    hdrHtml += '<div class="c-chevron">&#9660;</div>';
+    hdrHtml += '</div>';
     block.innerHTML = hdrHtml;
 
     var body = document.createElement('div');
-    body.className = 'ev-body';
+    body.className = 'c-card-body ev-body';
 
     var tableHtml = '<table class="ev-comp-table"><thead><tr><th>Competencia</th>';
     if(hasEne) tableHtml += '<th>Enero 360</th>';
@@ -762,10 +765,10 @@ function buildEvaluaciones(){
 var evRadars = {};
 function toggleEv(id){
   var block = document.getElementById('ev-'+id);
-  var isOpen = block.classList.contains('ev-person-open');
-  document.querySelectorAll('.ev-person-block').forEach(function(b){b.classList.remove('ev-person-open');});
+  var isOpen = block.classList.contains('open');
+  document.querySelectorAll('#ev-container .c-card').forEach(function(b){b.classList.remove('open');});
   if(!isOpen){
-    block.classList.add('ev-person-open');
+    block.classList.add('open');
     if(!evRadars[id]){
       setTimeout(function(){
         var realName = Object.keys(data360).find(function(n){return n.replace(/\s+/g,'-').replace(/[^a-zA-Z0-9-]/g,'')===id;});
