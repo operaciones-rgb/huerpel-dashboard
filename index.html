@@ -702,7 +702,8 @@ function buildEvaluaciones(){
     block.id = 'ev-'+id;
 
     var hdrHtml = '<div class="ev-person-header" onclick="toggleEv(\''+id+'\')">';
-    hdrHtml += '<div><div class="ev-pname">'+name+'</div><div class="ev-prole">'+(p.puesto||'')+'</div></div>';
+    var chipsHtml = (p.yellow||[]).map(function(c){return '<span class="chip-y">'+c+'</span>';}).join(' ');
+    hdrHtml += '<div><div class="ev-pname">'+name+'</div><div class="ev-prole">'+(p.puesto||'')+'</div><div style="margin-top:5px;display:flex;flex-wrap:wrap;gap:4px;">'+chipsHtml+'</div></div>';
     hdrHtml += '<div class="ev-summary-scores">';
     if(hasEne) hdrHtml += '<div class="ev-score-box"><div class="ev-score-lbl">Enero 360</div><div class="ev-score-val score '+sc(eneScore)+'">'+eneScore+'%</div></div>';
     hdrHtml += '<div class="ev-score-box"><div class="ev-score-lbl">Octubre 360</div><div class="ev-score-val score '+sc(octScore)+'">'+octScore+'%</div></div>';
